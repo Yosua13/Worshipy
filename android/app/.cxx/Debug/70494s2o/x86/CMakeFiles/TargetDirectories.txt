@@ -1,0 +1,2 @@
+D:/flutter/worshipy/android/app/.cxx/Debug/70494s2o/x86/CMakeFiles/edit_cache.dir
+D:/flutter/worshipy/android/app/.cxx/Debug/70494s2o/x86/CMakeFiles/rebuild_cache.dir
