@@ -24,6 +24,8 @@ class SongList extends StatelessWidget {
                 '${index + 1}',
                 style: const TextStyle(
                   fontSize: 14,
+                  color: Colors.white,
+                  fontFamily: "Satoshi",
                 ),
               ),
               const SizedBox(width: 12),
@@ -46,9 +48,20 @@ class SongList extends StatelessWidget {
           ),
           title: Text(
             song.title,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            style: const TextStyle(
+              fontFamily: "Satoshi",
+              fontSize: 16,
+              fontWeight: FontWeight.w700,
+              color: Color(0xFFD6D6D6),
+            ),
           ),
-          subtitle: Text(song.artist),
+          subtitle: Text(
+            song.artist,
+            style: TextStyle(
+              color: Color(0xFFD6D6D6),
+              fontSize: 12,
+            ),
+          ),
           onTap: () {
             Provider.of<SongProvider>(context, listen: false).setSong(song);
             Navigator.push(
