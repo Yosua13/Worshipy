@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:learning_audio/models/song.dart';
+import 'package:learning_audio/database/khotbah.dart';
+import 'package:learning_audio/database/worship.dart';
 import 'package:learning_audio/widgets/song_list.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -9,13 +10,24 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final TextEditingController _searchController = TextEditingController();
+
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _tabController = TabController(length: 4, vsync: this);
+  }
 
   @override
   void dispose() {
     _searchController.dispose();
+    _tabController.dispose();
     super.dispose();
   }
 
@@ -159,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
               borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.15),
+                  color: Colors.grey.shade800,
                   spreadRadius: 2,
                   blurRadius: 10,
                   offset: const Offset(0, 3),
@@ -190,6 +202,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   TabBar(
                     dividerColor: Colors.transparent,
                     // isScrollable: true,
+                    controller: _tabController,
                     labelColor: Colors.white,
                     unselectedLabelColor: Colors.grey,
                     indicatorColor: Colors.white,
@@ -202,11 +215,24 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Expanded(
                     child: TabBarView(
+                      controller: _tabController,
                       children: [
-                        SongList(songs: songs),
-                        SongList(songs: songs),
-                        SongList(songs: songs),
-                        SongList(songs: songs),
+                        SongList(
+                          mp3: worship,
+                          searchController: _searchController,
+                        ),
+                        SongList(
+                          mp3: worship,
+                          searchController: _searchController,
+                        ),
+                        SongList(
+                          mp3: worship,
+                          searchController: _searchController,
+                        ),
+                        SongList(
+                          mp3: khotbah,
+                          searchController: _searchController,
+                        ),
                       ],
                     ),
                   ),

@@ -4,17 +4,57 @@ import 'package:learning_audio/providers/song_providers.dart';
 import 'package:learning_audio/screens/player_screen.dart';
 import 'package:provider/provider.dart';
 
-class SongList extends StatelessWidget {
-  final List<Song> songs;
+class SongList extends StatefulWidget {
+  final List<Song> mp3;
+  final TextEditingController searchController;
 
-  const SongList({super.key, required this.songs});
+  const SongList({
+    super.key,
+    required this.mp3,
+    required this.searchController,
+  });
+
+  @override
+  State<SongList> createState() => _SongListState();
+}
+
+class _SongListState extends State<SongList> {
+  List<Song> _filteredSongs = [];
+
+  void _onSearchChanged() {
+    _applyFilter();
+  }
+
+  void _applyFilter() {
+    String query = widget.searchController.text.toLowerCase();
+    setState(() {
+      _filteredSongs = widget.mp3
+          .where((song) =>
+              song.title.toLowerCase().contains(query) ||
+              song.artist.toLowerCase().contains(query))
+          .toList();
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    widget.searchController.addListener(_onSearchChanged);
+    _applyFilter();
+  }
+
+  @override
+  void dispose() {
+    widget.searchController.removeListener(_onSearchChanged);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: songs.length,
+      itemCount: _filteredSongs.length,
       itemBuilder: (context, index) {
-        final song = songs[index];
+        final song = _filteredSongs[index];
         return ListTile(
           contentPadding: const EdgeInsets.symmetric(horizontal: 16),
           leading: Row(
