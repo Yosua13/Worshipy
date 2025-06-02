@@ -10,6 +10,24 @@ class SongProvider with ChangeNotifier {
   Song? get currentSong => _currentSong;
   bool get isPlaying => _isPlaying;
 
+  double _volume = 1.0;
+  double get volume => _volume;
+
+  // double _speed = 1.0;
+  // double get speed => _speed;
+
+  // void setSpeed(double value) {
+  //   _speed = value;
+  //   audioPlayer.setSpeed(value);
+  //   notifyListeners();
+  // }
+
+  void setVolume(double value) {
+    _volume = value;
+    audioPlayer.setVolume(value);
+    notifyListeners();
+  }
+
   Future<void> setSong(Song song) async {
     _currentSong = song;
     await audioPlayer.setUrl(song.url);

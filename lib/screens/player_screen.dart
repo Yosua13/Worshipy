@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:learning_audio/providers/song_providers.dart';
+import 'package:learning_audio/widgets/speed_control_button.dart';
+import 'package:learning_audio/widgets/volume_slider_button.dart';
 import 'package:provider/provider.dart';
 
 class PlayerScreen extends StatefulWidget {
@@ -172,38 +174,42 @@ class _PlayerScreenState extends State<PlayerScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          VolumeSliderButton(),
+                          const SizedBox(width: 10),
                           IconButton(
                             icon: const Icon(
                               Icons.replay_5,
-                              size: 40,
+                              size: 35,
                               color: Colors.white,
                             ),
                             onPressed: () => songProvider
                                 .seekRelative(const Duration(seconds: -5)),
                           ),
-                          const SizedBox(width: 16),
+                          const SizedBox(width: 10),
                           IconButton(
                             icon: Icon(
                               songProvider.isPlaying
                                   ? Icons.pause_circle_filled
                                   : Icons.play_circle_fill,
-                              size: 75,
+                              size: 65,
                               color: Colors.white,
                             ),
                             onPressed: () {
                               songProvider.togglePlayPause();
                             },
                           ),
-                          const SizedBox(width: 16),
+                          const SizedBox(width: 10),
                           IconButton(
                             icon: const Icon(
                               Icons.forward_5,
-                              size: 40,
+                              size: 35,
                               color: Colors.white,
                             ),
                             onPressed: () => songProvider
                                 .seekRelative(const Duration(seconds: 5)),
                           ),
+                          const SizedBox(width: 10),
+                          // SpeedControlButton(),
                         ],
                       ),
                       // const SizedBox(height: 40),
