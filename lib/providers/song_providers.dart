@@ -13,14 +13,14 @@ class SongProvider with ChangeNotifier {
   double _volume = 1.0;
   double get volume => _volume;
 
-  // double _speed = 1.0;
-  // double get speed => _speed;
+  double _speed = 1.0;
+  double get speed => _speed;
 
-  // void setSpeed(double value) {
-  //   _speed = value;
-  //   audioPlayer.setSpeed(value);
-  //   notifyListeners();
-  // }
+  void setSpeed(double value) {
+    _speed = value;
+    audioPlayer.setSpeed(value);
+    notifyListeners();
+  }
 
   void setVolume(double value) {
     _volume = value;

@@ -209,7 +209,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                 .seekRelative(const Duration(seconds: 5)),
                           ),
                           const SizedBox(width: 10),
-                          // SpeedControlButton(),
+                          SpeedControlButton(),
                         ],
                       ),
                       // const SizedBox(height: 40),

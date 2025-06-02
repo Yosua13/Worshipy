@@ -69,20 +69,18 @@ class _SongListState extends State<SongList> {
                 ),
               ),
               const SizedBox(width: 12),
-              ClipRRect(
-                child: Image.network(
-                  song.coverUrl,
-                  width: 60,
-                  height: 60,
-                  fit: BoxFit.fill,
-                  errorBuilder: (context, error, stackTrace) {
-                    return const SizedBox(
-                      width: 60,
-                      height: 60,
-                      child: Center(child: Icon(Icons.error)),
-                    );
-                  },
-                ),
+              Image.network(
+                song.coverUrl,
+                width: 60,
+                height: 60,
+                fit: BoxFit.fill,
+                errorBuilder: (context, error, stackTrace) {
+                  return const SizedBox(
+                    width: 60,
+                    height: 60,
+                    child: Center(child: Icon(Icons.error)),
+                  );
+                },
               ),
             ],
           ),
